@@ -1,0 +1,20 @@
+name: Build and Deploy
+on: # 监听 main分支上的 push 事件
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # 构建环境使用 ubuntu
+    steps:
+      - name: Checkout  # 将代码拉到虚拟机
+        uses: actions/checkout@v2.3.1  
+        with:
+          persist-credentials: false
+
+      - name: Deploy   # 部署
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: main # 部署后提交到的分支
+          folder: / # 这里填打包好的目录名称,将/目录内容作为网站的根访问资源
